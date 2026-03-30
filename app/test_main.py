@@ -57,8 +57,7 @@ from app.main import outdated_products
         ),
     ]
 )
-def test_outdated_products(mocked_today: datetime,
-                           products: list,
-                           expected: list) -> None:
-    with patch("app.main.datetime.date.today", return_value=mocked_today):
+def test_outdated_products(mocked_today: datetime, products: list[dict], expected:list[str]) -> None:
+    with patch("app.main.datetime.date") as mock_date:
+        mock_date.today.return_value = mocked_today
         assert outdated_products(products) == expected
