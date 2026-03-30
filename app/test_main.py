@@ -10,56 +10,45 @@ from app.main import outdated_products
         (
             datetime.date(2022, 2, 2),
             [
-                {"name": "salmon", "expiration_date":
-                    datetime.date(2022, 2, 10), "price": 600},
-                {"name": "chicken", "expiration_date":
-                    datetime.date(2022, 2, 5), "price": 120},
-                {"name": "duck", "expiration_date":
-                    datetime.date(2022, 2, 1), "price": 160},
+                {"name": "salmon", "expiration_date": datetime.date(2022, 2, 10), "price": 600},
+                {"name": "chicken", "expiration_date": datetime.date(2022, 2, 5), "price": 120},
+                {"name": "duck", "expiration_date": datetime.date(2022, 2, 2), "price": 160},
             ],
-            ["duck"],
+            [],
         ),
         (
             datetime.date(2022, 2, 6),
             [
-                {"name": "salmon", "expiration_date":
-                    datetime.date(2022, 2, 10), "price": 600},
-                {"name": "chicken", "expiration_date":
-                    datetime.date(2022, 2, 5), "price": 120},
-                {"name": "duck", "expiration_date":
-                    datetime.date(2022, 2, 1), "price": 160},
+                {"name": "salmon", "expiration_date": datetime.date(2022, 2, 10), "price": 600},
+                {"name": "chicken", "expiration_date": datetime.date(2022, 2, 5), "price": 120},
+                {"name": "duck", "expiration_date": datetime.date(2022, 2, 1), "price": 160},
             ],
             ["chicken", "duck"],
         ),
         (
             datetime.date(2022, 2, 11),
             [
-                {"name": "salmon", "expiration_date":
-                    datetime.date(2022, 2, 10), "price": 600},
-                {"name": "chicken", "expiration_date":
-                    datetime.date(2022, 2, 5), "price": 120},
-                {"name": "duck", "expiration_date":
-                    datetime.date(2022, 2, 1), "price": 160},
+                {"name": "salmon", "expiration_date": datetime.date(2022, 2, 10), "price": 600},
+                {"name": "chicken", "expiration_date": datetime.date(2022, 2, 5), "price": 120},
+                {"name": "duck", "expiration_date": datetime.date(2022, 2, 1), "price": 160},
             ],
             ["salmon", "chicken", "duck"],
         ),
         (
             datetime.date(2022, 1, 31),
             [
-                {"name": "salmon", "expiration_date":
-                    datetime.date(2022, 2, 10), "price": 600},
-                {"name": "chicken", "expiration_date":
-                    datetime.date(2022, 2, 5), "price": 120},
-                {"name": "duck", "expiration_date":
-                    datetime.date(2022, 2, 1), "price": 160},
+                {"name": "salmon", "expiration_date": datetime.date(2022, 2, 10), "price": 600},
+                {"name": "chicken", "expiration_date": datetime.date(2022, 2, 5), "price": 120},
+                {"name": "duck", "expiration_date": datetime.date(2022, 2, 1), "price": 160},
             ],
             [],
         ),
     ]
 )
-def test_outdated_products(mocked_today: datetime,
+def test_outdated_products(mocked_today: datetime.date,
                            products: list[dict],
                            expected: list[str]) -> None:
     with patch("app.main.datetime.date") as mock_date:
         mock_date.today.return_value = mocked_today
+
         assert outdated_products(products) == expected
